@@ -9,7 +9,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class TestNGDataProvider {
@@ -39,16 +38,9 @@ public class TestNGDataProvider {
 		driver.quit();
 	}
 	
-	@DataProvider(name = "calc-data")
-	Object[][] testData() {
-		return new Object[][] {
-			{"2 + 3", "5"}, // data set
-			{"sqrt 16", "4"}, // data set
-			{"3 - 2", "1"} // data set
-		};		
-	}
+	
 		
-	@Test(dataProvider = "calc-data")
+	@Test(dataProvider = "calc-data", dataProviderClass = TestData.class)
 	void calcTest(String input, String expected) {			
 		WebElement element = driver.findElement(By.name("q"));
 		element.sendKeys(input);
